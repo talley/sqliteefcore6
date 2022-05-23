@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@using SqliteRazorPagesApp.Models
+@{
+    ViewData["Title"] = "Home page";
+    List<Blog> blogs = this.Model.Blogs;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Blog</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Url</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach(var b in blogs)
+            {
+                <tr>
+                    <td>@b.BlogId</td>
+                    <td>@b.Url</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
