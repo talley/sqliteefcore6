@@ -6,7 +6,7 @@ namespace SqliteRazorPagesApp.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly BloggingContext _db;
-        public List<Blog> _blogs = new List<Blog>();
+        public List<SqliteRazorPagesApp.Models.Blog> _blogs = new List<SqliteRazorPagesApp.Models.Blog>();
         public IndexModel(ILogger<IndexModel> logger, BloggingContext db)
         {
             _logger = logger;
@@ -18,7 +18,7 @@ namespace SqliteRazorPagesApp.Pages
             _blogs=_db.Blogs.ToList();
         }
 
-        public List<Blog> Blogs
+        public List<SqliteRazorPagesApp.Models.Blog> Blogs
         {
             get
             {
@@ -26,4 +26,5 @@ namespace SqliteRazorPagesApp.Pages
             }
         }
     }
+
 }

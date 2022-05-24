@@ -1,0 +1,28 @@
+﻿@model SqliteRazorPagesApp.Models.Blog
+@{
+
+}
+<h1>Add Blog</h1>
+@using(Html.BeginForm("Add","Blog",FormMethod.Post))
+{
+<table>
+    <tbody>
+        <tr>
+            <th>Url</th>
+            <td>
+                @Html.TextBoxFor(t=>t.Url)
+            </td>
+            <td>
+                <span>@Html.ValidationMessageFor(v=>v.Url)</span>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="submit" value="Add"/>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+}

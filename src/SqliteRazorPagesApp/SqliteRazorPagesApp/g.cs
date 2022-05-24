@@ -7,3 +7,8 @@ global using SqliteRazorPagesApp.Data;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Mvc.RazorPages;
 global using SqliteRazorPagesApp.Models;
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.EntityFrameworkCore;
+global using Newtonsoft.Json;
+global using Newtonsoft;
+

@@ -16,3 +16,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+field-validation_message{
+    color:red;
+}
+.field-validation-error {
+    color: red;
+}

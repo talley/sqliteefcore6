@@ -3,12 +3,20 @@
 @using SqliteRazorPagesApp.Models
 @{
     ViewData["Title"] = "Home page";
-    List<Blog> blogs = this.Model.Blogs;
+    List<SqliteRazorPagesApp.Models.Blog> blogs = this.Model.Blogs;
+}
+
+@section Styles{
+
+    <link  href="~/lib/jqueryui/jquery-ui.min.css" rel="stylesheet"/>
 }
 
 <div class="text-center">
-    <h1 class="display-4">Blog</h1>
-    <table>
+    <h1 class="display-4">Blog</h1> <hr/>
+
+    <a href="/Blog/Add" id="addLink">Add Blog</a>
+    <hr/>
+    <table id="myTable" class="display">
         <thead>
             <tr>
                 <th>Id</th>
@@ -24,10 +32,42 @@
                 <tr>
                     <td>@b.BlogId</td>
                     <td>@b.Url</td>
-                    <td></td>
-                    <td></td>
+                    <td><a href="#" onclick="LoadEditForm('@b.BlogId')">Edit</a></td>
+                   <td><a href="/Blog/Delete/@b.BlogId">Delete</a></td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+<div id="editform" class="editform" title="Editing Blog">
+
+</div>
+
+@section Scripts{
+    <script src="~/lib/jqueryui/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+function LoadEditForm(id) {
+    console.log(`Blog  Id is:${id}`);
+    var editForm = $('#editform');
+    axios.get('/Blog/Edit/'+id)
+        .then(resp => {
+           // console.log(resp);
+            //console.log(resp.data);
+            editForm.html(resp.data);
+            editForm.dialog({
+  width: 300,height: 200, closeText: "hide"
+});
+        })
+        .catch(error => {
+            console.log('This error occurred:' + error);
+        })
+
+}
+        $(function(){
+            $('.editform').hide();
+            $('#addLink').attr('margin-left', '-7');
+            $('#myTable').DataTable();
+        })
+    </script>
+}

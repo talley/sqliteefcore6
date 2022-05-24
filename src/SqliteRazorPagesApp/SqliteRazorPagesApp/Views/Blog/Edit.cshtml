@@ -1,0 +1,58 @@
+﻿@model SqliteRazorPagesApp.Models.Blog
+@{
+    Layout = null;
+    var id = this.Model.BlogId;
+    var blog = this.Model;
+    var jblog =JsonConvert.SerializeObject(this.Model);
+}
+<table>
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td><input asp-for="BlogId"/></td>
+            <td><span>@Html.ValidationMessageFor(x=>x.BlogId)</span></td>
+        </tr>
+        <tr>
+            <th>Url</th>
+            <td><input asp-for="Url"/></td>
+            <td><span>@Html.ValidationMessageFor(x=>x.Url)</span></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><input type="submit" value="Update Blog" onclick="UpdateBlog()"/></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<script src="~/js/models.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+console.log('ok');
+function UpdateBlog() {
+    let id=$('#BlogId').val();
+    let url = $('#Url').val();
+    let appurl = '/api/BlogApi/' + id;
+    let blog = new Blog(id, url);
+
+    axios.put(appurl,blog)
+        .then(resp => {
+            let result = resp.data;
+            //"statusText":"No Content"
+            var status = resp.statusText;
+            let json = JSON.stringify(resp);
+            console.log('---RESPONSE----' + json);
+            console.log('---statusText---:' + status);
+            if (status == 'No Content') {
+                alert('Update Successful');
+                 location.reload();
+            }
+
+        })
+        .catch(error=>{
+            console.log('---ERROR---:' + error);
+        })
+        .then(function () {
+            // always executed
+          });
+}
+</script>
