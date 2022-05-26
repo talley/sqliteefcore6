@@ -33,7 +33,7 @@
                     <td>@b.BlogId</td>
                     <td>@b.Url</td>
                     <td><a href="#" onclick="LoadEditForm('@b.BlogId')">Edit</a></td>
-                   <td><a href="/Blog/Delete/@b.BlogId">Delete</a></td>
+                   <td><a href="#" onclick="DeleteBlog('@b.BlogId')">Delete</a></td>
                 </tr>
             }
         </tbody>
@@ -63,7 +63,42 @@ function LoadEditForm(id) {
             console.log('This error occurred:' + error);
         })
 
-}
+};// end LoadEditForm
+
+function DeleteBlog(id) {
+    if (confirm("Press a button!") == true)
+    {
+        let appurl = '/api/BlogApi/' + id;
+
+        axios.delete(appurl)
+            .then(resp => {
+                let result = resp.data;
+                //"statusText":"No Content"
+                var status = resp.statusText;
+                let json = JSON.stringify(resp);
+                console.log('---RESPONSE----' + json);
+                console.log('---statusText---:' + status);
+                if (status == 'No Content') {
+                    alert('Delete Successful');
+                     //location.reload();
+                    history.go(0);
+                }
+
+            })
+            .catch(error=>{
+                console.log('---ERROR---:' + error);
+            })
+            .then(function () {
+                // always executed
+              }); //end delete
+    }
+    else
+    {
+        alert('Blog deletion cancelled');
+    }
+
+};//end DeleteBlog
+
         $(function(){
             $('.editform').hide();
             $('#addLink').attr('margin-left', '-7');

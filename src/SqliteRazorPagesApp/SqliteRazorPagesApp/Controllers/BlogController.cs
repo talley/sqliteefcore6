@@ -34,7 +34,7 @@ namespace SqliteRazorPagesApp.Controllers
                     var result = await _db.SaveChangesAsync().ConfigureAwait(false);
                     if (result > 0)
                     {
-                        return RedirectToPage("Index");
+                        return RedirectToPagePermanent("/Index");
                     }
                     else
                     {
