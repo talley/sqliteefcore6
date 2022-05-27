@@ -21,8 +21,10 @@
             <tr>
                 <th>Id</th>
                 <th>Url</th>
+                 <th>Posts</th>
                 <th>Edit</th>
                 <th>Delete</th>
+
             </tr>
         </thead>
 
@@ -32,8 +34,10 @@
                 <tr>
                     <td>@b.BlogId</td>
                     <td>@b.Url</td>
+                     <td><a href="/Post/Add?id=@b.BlogId">Posts</a></td>
                     <td><a href="#" onclick="LoadEditForm('@b.BlogId')">Edit</a></td>
                    <td><a href="#" onclick="DeleteBlog('@b.BlogId')">Delete</a></td>
+
                 </tr>
             }
         </tbody>
